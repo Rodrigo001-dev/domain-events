@@ -29,8 +29,12 @@ export class Order extends Entity<OrderProps> {
     return this.props.createdAt;
   }
 
-  static create(props: OrderProps) {
+  static create(props: OrderProps, id?: string) {
     const order = new Order(props);
+
+    if (!id) {
+      // Criando um novo pedido / fechando uma venda
+    }
 
     return order;
   }
