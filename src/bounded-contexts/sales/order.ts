@@ -1,3 +1,5 @@
+import { Entity } from "../../core/Entity";
+
 interface OrderProps {
   customerId: string;
   productId: string;
@@ -6,9 +8,7 @@ interface OrderProps {
   createdAt: Date;
 }
 
-export class Order {
-  private props: OrderProps;
-
+export class Order extends Entity<OrderProps> {
   get customerId() {
     return this.props.customerId;
   }
@@ -27,10 +27,6 @@ export class Order {
 
   get createdAt() {
     return this.props.createdAt;
-  }
-
-  private constructor(props: OrderProps) {
-    this.props = props;
   }
 
   static create(props: OrderProps) {
