@@ -1,4 +1,6 @@
 import { Entity } from "../../core/Entity";
+import { OrderCreatedEvent } from "./order-created";
+import { OrderPaidEvent } from "./order-paid";
 
 interface OrderProps {
   customerId: string;
@@ -29,11 +31,19 @@ export class Order extends Entity<OrderProps> {
     return this.props.createdAt;
   }
 
+  public pay() {
+    this.props.status = "paid";
+
+    this.addDomainEvent(new OrderPaidEvent(this));
+  }
+
   static create(props: OrderProps, id?: string) {
     const order = new Order(props);
 
     if (!id) {
       // Criando um novo pedido / fechando uma venda
+      // eu estou anotando os eventos que estão acontecendo na aplicação
+      order.addDomainEvent(new OrderCreatedEvent(order));
     }
 
     return order;

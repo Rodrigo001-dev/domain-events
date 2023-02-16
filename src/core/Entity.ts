@@ -1,15 +1,15 @@
 import { randomUUID } from "node:crypto";
 
+import { DomainEvent } from "./DomainEvent";
+import { DomainEvents } from "./DomainEvents";
+
 // coloquei como classe abstrata para não ser possível implementa-lá, não vai
 // ser possível instanciar essa classe diretamente, sempre vai ser necessário
 // estender ela
 export abstract class Entity<Props> {
   protected readonly _id: string;
   protected props: Props;
-
-  get id() {
-    return this._id;
-  }
+  private _domainEvents: DomainEvent[] = [];
 
   // coloquei que é uma protected e não private porque se não as classes que
   // estenderem essa classe não vão conseguir acessar
@@ -21,5 +21,14 @@ export abstract class Entity<Props> {
     // se eu crio uma entidade e não passo o id quer dizer que estou criando algo
     // novo
     this._id = id ?? randomUUID();
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  protected addDomainEvent(domainEvent: DomainEvent) {
+    this._domainEvents.push(domainEvent);
+    DomainEvents.markEntityForDispatch(this);
   }
 }

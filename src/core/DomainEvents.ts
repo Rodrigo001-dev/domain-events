@@ -11,7 +11,9 @@ export class DomainEvents {
   // vou criar propriedades estáticas para conseguir acessar elas mesmo sem
   // instancia a classe
   static subscribers: Subscribers = {}; // os subscribers é que ouve os eventos
-  static publishers: Entity<any>[] = []; // publishers podem disparar os eventos
+  // o markedEntitiesToDispatch vai anotar em um array quais entidades possuem
+  // eventos que precisam ser disparado em algum momento
+  static markedEntitiesToDispatch: Entity<any>[] = [];
 
   public static registerSubscriber(
     event: string,
@@ -25,6 +27,18 @@ export class DomainEvents {
       // se não
       // eu crio aquilo do zero
       this.subscribers[event] = [callback];
+    }
+  }
+
+  public static markEntityForDispatch(entity: Entity<any>) {
+    const alreadyMarked = this.markedEntitiesToDispatch.find(
+      (item) => item.id === entity.id
+    );
+
+    if (!alreadyMarked) {
+      // vou anotar em um array todas entidades que possuem pelo menos algum
+      // evento para ser disparado
+      this.markedEntitiesToDispatch.push(entity);
     }
   }
 }
