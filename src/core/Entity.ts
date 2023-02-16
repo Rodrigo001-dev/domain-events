@@ -27,8 +27,16 @@ export abstract class Entity<Props> {
     return this._id;
   }
 
+  get domainEvents() {
+    return this._domainEvents;
+  }
+
   protected addDomainEvent(domainEvent: DomainEvent) {
     this._domainEvents.push(domainEvent);
     DomainEvents.markEntityForDispatch(this);
+  }
+
+  public clearEvents() {
+    this._domainEvents = [];
   }
 }

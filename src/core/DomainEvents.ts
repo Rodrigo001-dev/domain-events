@@ -41,4 +41,26 @@ export class DomainEvents {
       this.markedEntitiesToDispatch.push(entity);
     }
   }
+
+  public static dispatchEventsForEntity(id: string) {
+    const entity = this.markedEntitiesToDispatch.find((item) => item.id === id);
+
+    if (entity) {
+      entity.domainEvents.forEach((event) => {
+        const eventClassName = event.constructor.name; // pegar o nome do evento
+
+        // se existe algum subscriber ouvindo este evento
+        if (eventClassName in this.subscribers) {
+          // vou pegar todas as funções que estão ouvindo o meu evento
+          const handlers = this.subscribers[eventClassName];
+
+          for (const handler of handlers) {
+            handler(event);
+          }
+        }
+      });
+
+      entity.clearEvents();
+    }
+  }
 }
