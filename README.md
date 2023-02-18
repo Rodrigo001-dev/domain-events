@@ -1,9 +1,5 @@
 # :page_with_curl: Projeto
 
-<LINKEDIN>
-Você sabe o que é Domain Events?
-</LINKEDIN>
-
 Antes de falar sobre Domain Events precisamos entender o que é DDD(Domain Driven Design)
 
 DDD é uma forma de desenhar software, e essa parte não tem relação com arquitetura de software especificamente, porque podemos pensar que design de software toca apenas aquilo que um usuário não técnico consegue entender, ele toca em regras de negócio, entidades, atores, casos de uso, tudo aquilo que uma pessoa não técnica consiga representar isso de outras maneiras, ela vai conseguir exemplificar quais as ações do software mesmo com uma linguagem não tão técnica e geralmente é ai que design de software para, pro momento onde arquitetura de software entra, que é como nós implementamos isso e a arquitetura toca em como vai ser desacoplado o código, como vai ser lidado a comunicação com outras APIs, banco de dados, isso são coisas que, se conversadas com uma pessoa não técnica ela não vai entender. Então a ideia do DDD é conseguir ter uma linguagem universal entre o que é código e o que a gente conversa com o nosso cliente.
@@ -25,10 +21,6 @@ O barbeiro está te explicando as necessidades que ele tem para uma aplicação,
 Com essa frase é possível perceber um efeito colateral, é importante entender que todo o software que criamos é uma tradução de um problema da vida real, se começamos pela parte técnica, que é a parte que muitas vezes nós gostamos, pode ocorrer o grande risco de ser desenvolvido um software que não resolve o problema do cliente.
 
 Design de software é exatamente a técnica que nos permite evitar com que seja escrito código que não faça sentido.
-
-<LINKEDIN>
-Pronto agora podemos ir para a parte que todos estavam esperando, a parte técnica
-</LINKEDIN>
 
 Antes de entender o que são Domain Events, precisamos entender um termo que é usado dentro do DDD que é o Bounded Contexts
 
